@@ -1,0 +1,75 @@
+
+###########################
+## List all data model keys
+sub list_data_models {
+
+    foreach $key (data_keys()) {
+        println("$key");
+        #println(data_query($key));
+    }
+
+}
+
+println("-------------------------");
+println("\c4Data Models\n");
+list_data_models();
+println("-------------------------");
+
+###########################
+## List keys from a specific data model
+sub list_datamodel_keys {
+
+    local('$key %data');
+    $key = $1;
+    %data = data_query($key);
+
+    foreach $var (keys(%data))
+    {
+        println($var);
+    }
+
+}
+
+println("-------------------------");
+println("\c4List keys from a specific data model (example model: metadata)\n");
+list_datamodel_keys("metadata");
+println("-------------------------");
+
+
+###########################
+## Print all data from a data model
+
+sub print_datamodel_data {
+    
+    local('$key');
+    $key = $1;
+    println(data_query($key));
+}
+
+println("-------------------------");
+println("\c4Get Data from Data Model (example mode; targets)");
+print_datamodel_data("targets");
+println("-------------------------");
+
+
+###########################
+## Read data from the C2 profile
+
+local("$profile $jitter $sleeptime")
+
+# Read the intial sleep time set in the c2 profile
+$profile = data_query("metadata")["c2profile"];
+
+# Use dot notation to walk the c2profile
+$sleeptime = [$profile getString: ".sleeptime"];
+$jitter = [$profile getString: ".jitter"];
+$stage_stomppe = [$profile getString: ".stage.stomppe"];
+$http_uri = [$profile getString: ".http-get.uri"];
+$spawnto = [$profile getString: ".post-ex.spawnto_x64"];
+
+
+println("Sleep   : " . $sleeptime);
+println("Jitter  : " . $jitter);
+println("StompPE : " . $stage_stomppe);
+println("HTTP URI: " . $http_uri);
+println("SpawnTo: " . $spawnto);

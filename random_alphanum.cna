@@ -1,0 +1,23 @@
+##################################################
+# Generate random printable text of specified length 
+
+sub rand_alphanum {
+
+#generate random printable text of length $length
+local('$length $out $charstr $i $index');
+    $length = $1;
+    $charstr = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890';
+    $out = '';
+    for($i = 0; $i < $length; $i++)
+    {
+        $index = rand(strlen($charstr));
+        $out = $out . substr($charstr, $index, $index + 1);
+    }
+    return $out;
+}
+
+println("-------------------------");
+println("\c4Print Random AlphaNum");
+println("Random 20: " . rand_alphanum(20));
+println("-------------------------");
+
