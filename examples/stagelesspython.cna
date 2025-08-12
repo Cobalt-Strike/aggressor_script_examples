@@ -1,4 +1,5 @@
-# Python Stageless Scripted Web Delivery
+# Stageless Python Web Delivery attack. Kind of fun. I did cheat and use an internal API. :)
+# Originally at https://gist.github.com/rsmudge/478296d699a28a407a64295332c03357
 
 # setup our stageless Python Web Delivery attack
 sub setup_attack {

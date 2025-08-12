@@ -1,3 +1,6 @@
+# Fire a beacon_revisited event when we get a checkin event that occurs some window of time (e.g., 60s here) after the last checkin event. Keep in mind checkin is only fired on task acknowledgement. If you set the window to 8 hours and don't interact with the Beacon for 8 hours--you'll fire revisited.
+# Originally at https://gist.github.com/rsmudge/49fb0a6a76a312cdd95666256265a64f
+
 global('%checkins');
 
 on beacon_checkin {

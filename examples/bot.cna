@@ -1,5 +1,5 @@
-# demonstrate an example of inversion-of-control with Aggressor Script
-#
+# Demonstration inversion-of-control using co-routines in Aggressor Script.
+# Originally at https://gist.github.com/rsmudge/bfe022245fb0f5491950b0e58cc80e0b
 
 # co-routine, 
 sub bot {

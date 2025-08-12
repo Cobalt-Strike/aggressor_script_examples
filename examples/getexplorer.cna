@@ -1,3 +1,6 @@
+# Get PID of the Explorer.exe Process
+# Originally at https://gist.github.com/rsmudge/20e69b0191a7786f9777
+
 # getexplorerpid($bid, &callback);
 sub getexplorerpid {
   bps($1, lambda({

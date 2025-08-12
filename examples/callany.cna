@@ -1,3 +1,7 @@
+# Create a hidden Beacon console and pass a command+args to it for execution.
+# Originally at https://gist.github.com/rsmudge/67a1293b665f80e54675c95d94525281
+
+
 import aggressor.windows.BeaconConsole;
 import java.awt.event.ActionEvent;
 

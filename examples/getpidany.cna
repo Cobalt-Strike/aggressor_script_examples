@@ -1,4 +1,6 @@
-# getexplorerpid($bid, &callback);
+# Get PID of Any Process
+# Originally at https://gist.github.com/rsmudge/6237e6923c181c0bc7e57fd6288dd1db
+
 sub getanypid {
   bps($1, lambda({
     local('$pid $name $entry');

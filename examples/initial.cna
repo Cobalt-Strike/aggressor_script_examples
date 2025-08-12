@@ -1,6 +1,5 @@
-#
-# Demonstrate how to queue tasks to execute with each checkin...
-#
+# How to automate Beacon to execute a sequence of tasks with each checkin.
+# Originally at https://gist.github.com/rsmudge/47df7dadfe6cc3629068a3be6f9f032f
 
 #
 # yield tells a function to pause and return a value. The next time the same instance of the

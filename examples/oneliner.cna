@@ -1,9 +1,10 @@
-# host a PowerShell script on a one-off web server via Beacon.
+# Host a PowerShell script on a one-off web server via Beacon.
 # 
 # Why? Generate one-liners for length constrained command execution opportunities
 #
 # NOTE: this uses internal APIs and is subject to break in the next release. Don't hate!
 #       if there's interest in this capability, I can build an official API for it.
+# Originally at https://gist.github.com/rsmudge/bc1791df7c4ddadb960510f366cdcba2
 
 import common.*;
 import beacon.*;

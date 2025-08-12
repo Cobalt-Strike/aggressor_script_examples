@@ -9,8 +9,24 @@
 
 Item                     | Description
 -------------------------|--------------------------
-[data_models.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/data_models.cna)          | example of interating with and extracting data from the Cobalt Strike data models
-[random_string.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/random_string.cna)        | functions to generate random data (i.e., random string generator)
+[bot.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/bot.cna)        | Demonstration inversion-of-control using co-routines in Aggressor Script.
+[callany.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/callany.cna)        | Create a hidden Beacon console and pass a command+args to it for execution.
+[checkit.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/checkit.cna)        | Fire a beacon_revisited event when we get a checkin event that occurs some window of time (e.g., 60s here) after the last checkin event. Keep in mind checkin is only fired on task acknowledgement. If you set the window to 8 hours and don't interact with the Beacon for 8 hours--you'll fire revisited.
+[data_models.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/data_models.cna)          | Example of interating with and extracting data from the Cobalt Strike data models
+[getenv.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/getenv.cna)        | Aggressor Script meant to parse/use environment vars in a Beacon session.
+[getexplorer.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/getexplorer.cna)        | Get PID of the Explorer.exe Process
+[getpidany.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/getpidany.cna)        | Get PID of Any Process
+[initial.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/initial.cna)        | How to automate Beacon to execute a sequence of tasks with each checkin
+[mkimport.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/mkimport.cna)        | Import creds from a file with mimikatz output.
+[mouse.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/mouse.cna)        | How to add a popup handler to a Swing component in Aggressor Script/Sleep
+[oneliner.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/oneliner.cna)        | Host a PowerShell script on a one-off web server via Beacon.
+[portfwd.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/portfwd.cna)        | Port forward alias in Beacon and SSH 
+[random_string.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/random_string.cna)        | Functions to generate random data (i.e., random string generator)
+[safedelete.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/safedelete.cna)        | Override default file browser popup in Cobalt Strike to prompt user when they try to delete a file.
+[search.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/search.cna)        | Search scrollback for a Beacon (even the stuff that's cut off)
+[stagelesspython.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/stagelesspython.cna)        | Stageless Python Web Delivery attack.
+[stagelessweb.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/stagelessweb.cna)        | A stageless variant of the PowerShell Web Delivery attack. This script demonstrates the new scripting APIs in Cobalt Strike 3.7 (generate stageless artifacts, host content on Cobalt Strike's web server, build dialogs, etc.)
+[tokenToEmail.cna](https://github.com/Cobalt-Strike/aggressor_script_examples/blob/main/examples/tokenToEmail.cna)        | This script demonstrates how to change Cobalt Strike's WEB_HIT and PROFILER_HIT hooks to resolve a phishing token to an email address.
 
 ## Scripts automatic load
 
@@ -75,3 +91,4 @@ If you'd like to contribute..
 - [Community Kit](https://cobalt-strike.github.io/community_kit)
 - [Aggressor Scripting](https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics_aggressor-scripts/agressor_script.htm)
 - [Sleep Manual](http://sleep.dashnine.org/manual/)
+- [Raphael Mudge GitHub Gist](https://gist.github.com/rsmudge)

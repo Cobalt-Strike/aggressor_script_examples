@@ -1,6 +1,6 @@
-# Scripted Web Delivery (Stageless)
-#
-# This script demonstrates some of the new APIs in Cobalt Strike 3.7.
+# A stageless variant of the PowerShell Web Delivery attack. This script demonstrates the new scripting APIs in Cobalt Strike 3.7 (generate stageless artifacts, host content on Cobalt Strike's web server, build dialogs, etc.)
+# Originally at https://gist.github.com/rsmudge/629bd4ddce3bbbca1f8c16378a6a419c
+
 
 # setup our stageless PowerShell Web Delivery attack
 sub setup_attack {

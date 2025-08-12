@@ -1,6 +1,6 @@
-#
-# safe delete in file browser right-click menu
-#
+# Override default file browser popup in Cobalt Strike to prompt user when they try to delete a file.
+# Originally at https://gist.github.com/rsmudge/4c565c77787fed7040521b1b8de48049
+
 popup_clear("filebrowser");
 
 popup filebrowser {

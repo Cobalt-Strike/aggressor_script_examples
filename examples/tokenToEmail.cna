@@ -1,9 +1,5 @@
-#
-# This script overrides WEB_HIT and PROFILER_HIT from default.cna to
-# resolve the id var (token) to an email
-# 
-# https://www.cobaltstrike.com/aggressor-script/cobaltstrike.html
-#
+# This script demonstrates how to change Cobalt Strike's WEB_HIT and PROFILER_HIT hooks to resolve a phishing token to an email address.
+# Originally at https://gist.github.com/rsmudge/c82c02b02347e0153c78024b9f64abd0
 
 # method, uri, addr, ua, response, size, handler, when
 set WEB_HIT {

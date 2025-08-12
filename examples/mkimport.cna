@@ -1,4 +1,5 @@
-# import mimikatz creds from a file.
+# Import creds from a file with mimikatz output.
+# Originally at https://gist.github.com/rsmudge/30867c1661aba56bed84bf8361ec5041
 
 # go to View -> Script Console
 # load this script

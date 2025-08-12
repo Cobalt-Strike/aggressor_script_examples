@@ -1,4 +1,5 @@
-# demonstrate how to add a popup handler to a Swing component in Sleep
+# How to add a popup handler to a Swing component in Aggressor Script/Sleep
+# Originally at https://gist.github.com/rsmudge/87ce80cd8d8d185c5870d559af2dc0c2
 
 import java.awt.*;
 

@@ -1,6 +1,5 @@
-#
-# Aggressor Script means to parse/use environment vars in a Beacon session.
-#
+# Aggressor Script meant to parse/use environment vars in a Beacon session.
+# Originally at https://gist.github.com/rsmudge/6c78e69c330f3ff57273200a08cae03d
 
 global('%bvars');
 

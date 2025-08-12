@@ -1,6 +1,5 @@
-#
-# port foreward alias in Beacon and SSH 
-#
+# Port forward alias in Beacon and SSH 
+# Originally at https://gist.github.com/rsmudge/6c8383a5ef452fb9641703295e613847
 
 # pull common code into a function
 sub _portfwd {

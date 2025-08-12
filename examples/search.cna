@@ -1,4 +1,7 @@
-# search for and reproduce output that matches a specific regex.
+# Search scrollback for a Beacon (even the stuff that's cut off)
+# Search for and reproduce output that matches a specific regex.
+# Originally at https://gist.github.com/rsmudge/e15c2a1bd47c3be1ad7b429beec9eac4
+
 alias search {
 	local('$regex $regex2 $entry $event $bid $out $when');
 
