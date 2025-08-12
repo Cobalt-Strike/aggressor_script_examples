@@ -1,0 +1,26 @@
+# search for and reproduce output that matches a specific regex.
+alias search {
+	local('$regex $regex2 $entry $event $bid $out $when');
+
+	# take all of the args, without processing/parsing as normal.
+	if (strlen($0) > 7) {
+		$regex = substr($0, 7);
+	}
+	else {
+		berror($1, "search [regex]");
+		return;
+	}
+
+	btask($1, "Search log with\cE $regex $+ \o");
+
+	# transform our regex to make it multi-line and ismatch friendly.
+	$regex2 = "(?ms).* $+ $regex $+ .*?";
+
+	# query our beacon log and walk *everything*
+	foreach $entry (data_query("beaconlog")) {
+		($event, $bid, $out, $when) = $entry;
+		if ($bid eq $1 && $event eq "beacon_output" && "Output at*matches*:*" !iswm $out && $out ismatch $regex2) {
+			blog($1, "Output at\cE " . dstamp($when) . " \omatches\cB $regex $+ \cE:\o\n\n $+ $out");
+		}
+	}
+}

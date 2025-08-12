@@ -1,0 +1,35 @@
+# demonstrate an example of inversion-of-control with Aggressor Script
+#
+
+# co-routine, 
+sub bot {
+	# run pwd and get the output.
+	bpwd($bid);
+	when("beacon_output_alt", $this);
+	yield;
+
+	println("WD of $bid is: $2 @ " . formatDate($3, "HH:mm:ss"));
+
+	# change directory.
+	bcd($bid, "c:\\");
+
+	# list files with dir!
+	bshell($bid, "dir");
+	when("beacon_output", $this);
+	yield;
+
+	println("Dir of c:\\ on $bid @ " . formatDate($3, "HH:mm:ss") . ":\n $+ $2");
+
+	# list files with ls (which takes a callback)
+	bls($bid, ".", $this);
+	yield;
+
+	println("Dir of c:\\ with ls():\n" . $3);
+}
+
+alias go {
+	# create a copy of the &bot function with $bid = beacon id set in the function's scope
+	# [all that stuff] invokes the function
+	[lambda(&bot, $bid => $1)];
+}
+

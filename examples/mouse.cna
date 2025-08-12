@@ -1,0 +1,35 @@
+# demonstrate how to add a popup handler to a Swing component in Sleep
+
+import java.awt.*;
+
+import javax.swing.*;
+import javax.swing.event.*;
+
+# safely add a listener to show a popup
+sub setupPopupMenu {
+	# we're using fork({}) to run this in a separate Aggressor Script environment.
+	# This reduces deadlock potential due to Sleep's global interpreter lock
+	#
+	# this especially matters as our mouse listener will be fired for *everything*
+	# to include mouse movements.
+	fork({
+		[$component addMouseListener: lambda({
+			if ([$1 isPopupTrigger]) {
+				show_popup($1, $name, $component);
+			}
+		}, \$component, \$name)];
+	}, $component => $1, $name => $2);
+}
+
+popup mickey_menu {
+	item "Hello World" {
+		[$1 setText: "Hey, you clicked me"];
+	}
+}
+
+command mickey {
+	local('$component');
+	$component = [new JLabel: "Hello World"];
+	addTab("Mouse Test", $component, "...");
+	setupPopupMenu($component, "mickey_menu");
+}

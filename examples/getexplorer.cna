@@ -1,0 +1,20 @@
+# getexplorerpid($bid, &callback);
+sub getexplorerpid {
+  bps($1, lambda({
+    local('$pid $name $entry');
+    foreach $entry (split("\n", $2)) {
+      ($name, $pid) = split("\\s+", $entry);
+      if ($name eq "explorer.exe") {
+        # $1 is our Beacon ID, $pid is the PID of explorer.exe
+        [$callback: $1, $pid];
+      }
+    }
+  }, $callback => $2));
+}
+
+# example to use this...
+alias explorer {
+  getexplorerpid($1, {
+    blog($1, "The PID is: $2");
+  });
+}

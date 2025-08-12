@@ -1,0 +1,20 @@
+# getexplorerpid($bid, &callback);
+sub getanypid {
+  bps($1, lambda({
+    local('$pid $name $entry');
+    foreach $entry (split("\n", $2)) {
+      ($name, $pid) = split("\\s+", $entry);
+      if ($name eq $proc) {
+        # $1 is our Beacon ID, $pid is the PID of $proc
+        [$callback: $1, $proc, $pid];
+      }
+    }
+  }, $proc => $2, $callback => $3));
+}
+
+# example to use this...
+alias getpid {
+  getanypid($1, $2, {
+    blog($1, "The PID of $2 is: $3");
+  });
+}

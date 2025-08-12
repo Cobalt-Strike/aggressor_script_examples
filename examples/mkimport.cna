@@ -1,0 +1,63 @@
+# import mimikatz creds from a file.
+
+# go to View -> Script Console
+# load this script
+# type importcreds /path/to/file.txt
+
+sub process {
+	if ($luser eq "(null)" || $luser eq "") {
+		return;
+	}
+	else if ([$luser endsWith: '$']) {
+		println("$luser ( $+ $domain $+ ) rejected because computer account");
+		return;
+	}
+	else if ($lpass eq "" && $lhash eq "") {
+		println("$luser ( $+ $domain $+ ) rejected because empty hash/password fields");
+		return;
+	}
+	else if ($lpass eq "(null)" && $lhash eq "") {
+		println("$luser ( $+ $domain $+ ) rejected because empty hash/password fields");
+		return;
+	}
+
+	println("ADD $luser ( $+ $ldomain $+ ): ' $+ $lpass $+ ' and ' $+ $lhash $+ '");
+
+	if ($lpass ne "(null)" && $lpass ne "") {
+		credential_add($luser, $lpass, $ldomain, "mimikatz-imported", "");
+	}
+		
+	if ($lhash ne "") {
+		credential_add($luser, $lhash, $ldomain, "mimikatz-imported", "");
+	}
+}
+
+sub parsefile {
+	local('$handle $luser $lpass $ldomain $key');
+	$handle = openf($1);
+	while $temp (readln($handle)) {
+		$key = strrep($temp, " ", "", "\t", "");
+
+		if ($key ismatch ".Username:(.*?)") {
+			$luser = matched()[0];
+		}
+		else if ($key ismatch ".Password:(.*?)") {
+			$lpass = matched()[0];
+		}
+		else if ($key ismatch ".Domain:(.*?)") {
+			$ldomain = matched()[0];
+
+			process(\$luser, \$lpass, \$lhash, \$ldomain);
+
+			($lpass, $luser, $lhash, $ldomain) = $null;
+		}
+		else if ($key ismatch ".NTLM:(.*?)") {
+			$lhash = matched()[0];
+		}
+	}
+	closef($temp);
+}
+
+command importcreds {
+	parsefile($1);
+}

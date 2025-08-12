@@ -1,0 +1,35 @@
+#
+# safe delete in file browser right-click menu
+#
+popup_clear("filebrowser");
+
+popup filebrowser {
+	item "&Download" {
+		local('$file');
+		foreach $file ($3) {
+			bdownload($1, "$2 $+ \\ $+ $file");
+		}
+	}
+
+	item "&Execute" {
+		prompt_text("Arguments?", "", lambda({
+			foreach $file ($files) {
+				bexecute($bid, "$folder $+ \\ $+ $file" . iff($1 ne "", " $1"));
+			}
+		}, $bid => $1, $folder => $2, $files => $3));
+	}
+
+	separator();
+
+	item "D&elete" {
+		prompt_confirm("Do you really want to delete stuff", "Safety Check", lambda({
+			local('$file');
+			foreach $file ($files) {
+				brm($bid, "$folder $+ \\ $+ $file");
+			}
+
+			# force a refresh on the file browser.
+			[$browser ls: $folder];
+		}, $bid => $1, $folder => $2, $files => $3, $browser => $4));
+	}	
+}

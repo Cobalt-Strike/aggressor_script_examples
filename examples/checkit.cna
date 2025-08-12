@@ -1,0 +1,21 @@
+global('%checkins');
+
+on beacon_checkin {
+	local('$last');
+
+	if ($1 in %checkins) {
+		$last = %checkins[$1];
+
+		# has it been 1m since the last task acknowledgement?
+		if (($3 - $last) > 60000) {
+			fire_event("beacon_revisited", $1);
+		}
+	}
+
+	# store last checkin
+	%checkins[$1] = $3;
+}
+
+on beacon_revisited {
+	println("Beacon $1 is here!");
+}

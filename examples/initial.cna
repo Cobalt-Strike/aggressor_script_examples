@@ -1,0 +1,78 @@
+#
+# Demonstrate how to queue tasks to execute with each checkin...
+#
+
+#
+# yield tells a function to pause and return a value. The next time the same instance of the
+# function is called, it will resume after where it last yielded.
+# 
+sub stuffToDo {
+	# Tasks for first checkin
+	binput($1, "Task 1");
+	bshell($1, "whoami /all");
+	yield;
+
+	# Tasks for second checkin
+	binput($1, "Task 2");
+	bshell($1, "arp -a");
+	yield;
+
+	# Tasks for third checkin
+	binput($1, "Task 3");
+	bpowershell($1, "2 + 2");
+	bpowershell($1, "2 + 3");
+	bpowershell($1, "2 + 4");
+
+	# we're done...
+	return 1; 
+}
+
+#
+# we want a way to have one copy of &stuffToDo per Beacon and manage that.
+#
+global('%tasks');
+
+# $1 = beacon ID
+sub initTasks {
+	# 1. create a fresh copy/instance of &stuffToDo;
+	# 2. associate with this Beacon
+	%tasks[$1] = lambda(&stuffToDo);
+}
+
+# $1 = beacon ID
+sub nextTask {
+	local('$task $result');
+
+	# grab the task function for this Beacon
+	$task = %tasks[$1];       
+
+	# no task function? we've executed everything
+	if ($task is $null) {
+		return; # nothing to do
+	}
+
+	# execute the task.
+	$result = [$task: $1];
+
+	# check the result to determine if we're done... otherwise
+	# function will restart from beginning on next call.
+	if ($result == 1) {
+		%tasks[$1] = $null;
+	}
+}
+
+#
+# when a new beacon comes in...
+#
+on beacon_initial {
+	# init our tasks
+	initTasks($1);
+
+	# execute the first one...
+	nextTask($1);     
+}
+
+on beacon_checkin {
+	# execute the next task (if there is one).
+	nextTask($1);
+}

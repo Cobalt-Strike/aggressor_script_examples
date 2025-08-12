@@ -1,0 +1,29 @@
+import aggressor.windows.BeaconConsole;
+import java.awt.event.ActionEvent;
+
+# $1 = beacon ID
+# $2 = command + args to run [as if you typed it in the console]
+sub beacon_input_command {
+        local('$event');
+        
+        # we make the console a static var because each console we create subscribes to a bunch of stuff
+        # and requires a manual step [normally performed by a Window close event] to clean up these things.
+        # without this move... you'll have a very unhappy memory leak or performance degredation over time.
+        this('$console');
+        if ($console is $null) {
+                $console = [new BeaconConsole: $1, getAggressorClient()];
+        }
+
+        # create a fake java.awt.event.ActionEvent object.
+        $event   = [new ActionEvent: [new javax.swing.JTextField], 0, $2];
+
+        # pass it to our console's actionPerformed method.
+        [$console actionPerformed: $event];
+}
+
+# test alias to try it out...
+# beacon> test shell dir c:\
+alias test {
+        beacon_input_command($1, substr($0, 5));
+}
+

